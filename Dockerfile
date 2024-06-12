@@ -24,11 +24,31 @@ RUN pip install pyspark
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
-COPY customers-1000000.zip
-RUN unzip customers-1000000.zip
-RUN mv customers-1000000.csv /home/
+WORKDIR /home/
+
+COPY customers-1000000.zip /home/
+COPY crud_create.py /home/
+COPY crud_delete.py /home/
+COPY crud_read.py /home/
+COPY crud_update.py /home/
+COPY exam1.py /home/
+COPY exam2.py /home/
+COPY exam3.py /home/
+COPY exam4.py /home/
+COPY exam5.py /home/
+COPY exam6.py /home/
+COPY exam7.py /home/
+COPY exam8.py /home/
+COPY exam9.py /home/
+COPY exam10.py /home/
+COPY exam11.py /home/
+COPY exam12.py /home/
+COPY get_session_data.py /home/
+RUN unzip customers-1000000
 RUN rm customers-1000000.zip
 
+# Tạo và chạy cơ sở dữ liệu SQLite
+RUN sqlite3 /home/sample.db ".mode csv" ".import /home/customers-1000000.csv my_database"
 
 
 
