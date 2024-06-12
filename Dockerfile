@@ -12,6 +12,7 @@ RUN apt-get -y install python3-pip
 RUN apt-get -y install net-tools
 RUN apt-get -y install sqlite3
 RUN apt-get -y install vim
+RUN apt-get -y install unzip
 RUN wget https://dlcdn.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
 RUN tar xvf spark-3.5.1-bin-hadoop3.tgz
 RUN mv spark-3.5.1-bin-hadoop3 /opt/spark
@@ -23,7 +24,10 @@ RUN pip install pyspark
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
-COPY customers-1000000.csv /home/data.csv
+COPY customers-1000000.zip
+RUN unzip customers-1000000.zip
+RUN mv customers-1000000.csv /home/
+RUN rm customers-1000000.zip
 
 
 
